@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogue Produits Guinéens</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        guineagreen: '#008000',
+                        guineared: '#CE1126',
+                        guineayellow: '#FCD116'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header class="bg-white shadow-sm">
+        <div class="flag-stripe"></div>
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-store text-guineagreen text-2xl"></i>
+                    <h1 class="text-xl font-bold text-gray-800">Produits<span class="text-guineagreen">Guinée</span></h1>
+                </div>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-guineagreen font-medium hover:text-guineared">Accueil</a>
+                    <a href="catalogue.html" class="text-gray-700 hover:text-guineagreen font-medium">Catalogue</a>
+                    <a href="about.html" class="text-gray-700 hover:text-guineagreen font-medium">À propos</a>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <a href="https://wa.me/224XXXXXXX" class="bg-green-500 text-white px-4 py-2 rounded-full hover:bg-green-600 transition">
+                        <i class="fab fa-whatsapp mr-1"></i> Contact
+                    </a>
+                    <button id="installApp" class="hidden bg-guineagreen text-white px-4 py-2 rounded-full hover:bg-green-700 transition">
+                        <i class="fas fa-download mr-1"></i> Installer
+                    </button>
+                    <button class="md:hidden text-gray-700" id="mobileMenuBtn">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white shadow-md">
+            <div class="container mx-auto px-4 py-3">
+                <nav class="flex flex-col space-y-3">
+                    <a href="index.html" class="text-guineagreen font-medium hover:text-guineared py-2">Accueil</a>
+                    <a href="catalogue.html" class="text-gray-700 hover:text-guineagreen font-medium py-2">Catalogue</a>
+                    <a href="about.html" class="text-gray-700 hover:text-guineagreen font-medium py-2">À propos</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white py-16 md:py-24">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Découvrez les <span class="text-guineayellow">Produits</span> Guinéens</h1>
+                    <p class="text-xl mb-8">Un catalogue des meilleurs produits locaux de Guinée, disponible même sans connexion internet.</p>
+                    <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
+                        <a href="catalogue.html" class="bg-white text-guineagreen px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition text-center">
+                            <i class="fas fa-shopping-bag mr-2"></i> Voir les produits
+                        </a>
+                        <a href="https://wa.me/224XXXXXXX" class="border-2 border-white text-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-guineagreen transition text-center">
+                            <i class="fab fa-whatsapp mr-2"></i> Commander via WhatsApp
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="relative">
+                        <img src="artisanat/1.png" alt="Produits guinéens" class="rounded-lg shadow-xl w-full max-w-md">
+                        <div class="absolute -bottom-5 -right-5 bg-guineared text-white px-4 py-2 rounded-full shadow-lg">
+                            <i class="fas fa-certificate mr-2"></i> 100% Local
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Categories -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Nos <span class="text-guineagreen">Catégories</span> de Produits</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
+                <!-- Artisanat -->
+                <a href="catalogue.html?categorie=artisanat" class="art-card bg-white rounded-xl overflow-hidden shadow-md p-6 text-center">
+                    <div class="bg-guineagreen bg-opacity-10 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-paint-brush text-guineagreen text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Artisanat</h3>
+                    <p class="text-gray-600 mb-4">Objets d'art et décorations faits main par des artisans locaux</p>
+                </a>
+                
+                <!-- Alimentaire -->
+                <a href="catalogue.html?categorie=alimentaire" class="art-card bg-white rounded-xl overflow-hidden shadow-md p-6 text-center">
+                    <div class="bg-guineared bg-opacity-10 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-utensils text-guineared text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Alimentaire</h3>
+                    <p class="text-gray-600 mb-4">Produits alimentaires traditionnels et spécialités guinéennes</p>
+                </a>
+                
+                <!-- Beauté -->
+                <a href="catalogue.html?categorie=beaute" class="art-card bg-white rounded-xl overflow-hidden shadow-md p-6 text-center">
+                    <div class="bg-guineayellow bg-opacity-10 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-spa text-guineayellow text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Beauté</h3>
+                    <p class="text-gray-600 mb-4">Produits cosmétiques naturels fabriqués en Guinée</p>
+                </a>
+                
+                <!-- Textile -->
+                <a href="catalogue.html?categorie=textile" class="art-card bg-white rounded-xl overflow-hidden shadow-md p-6 text-center">
+                    <div class="bg-gray-800 bg-opacity-10 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-tshirt text-gray-800 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Textile</h3>
+                    <p class="text-gray-600 mb-4">Vêtements et tissus traditionnels guinéens</p>
+                </a>
+                
+                <!-- Accessoires -->
+                <a href="catalogue.html?categorie=accessoires" class="art-card bg-white rounded-xl overflow-hidden shadow-md p-6 text-center">
+                    <div class="bg-guineagreen bg-opacity-10 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-gem text-guineagreen text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Accessoires</h3>
+                    <p class="text-gray-600 mb-4">Bijoux et accessoires de mode fabriqués localement</p>
+                </a>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="catalogue.html" class="border-2 border-guineagreen text-guineagreen px-6 py-3 rounded-full font-semibold hover:bg-guineagreen hover:text-white transition">
+                    <i class="fas fa-th-large mr-2"></i> Voir tout le catalogue
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-16 bg-guineagreen text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6">Accédez au catalogue même sans internet !</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Installez notre application sur votre téléphone pour consulter les produits à tout moment, même sans connexion.</p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                <button id="installAppCTA" class="bg-white text-guineagreen px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition">
+                    <i class="fas fa-download mr-2"></i> Installer l'application
+                </button>
+                <a href="https://wa.me/224XXXXXXX" class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-guineagreen transition">
+                    <i class="fab fa-whatsapp mr-2"></i> Contacter le vendeur
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-store text-guineagreen text-2xl"></i>
+                        <h2 class="text-xl font-bold">Produits<span class="text-guineagreen">Guinée</span></h2>
+                    </div>
+                    <p class="text-gray-400 mb-4">Catalogue des meilleurs produits locaux de Guinée, disponible hors ligne.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-guineagreen"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-guineagreen"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-guineagreen"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Liens rapides</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-guineagreen">Accueil</a></li>
+                        <li><a href="catalogue.html" class="text-gray-400 hover:text-guineagreen">Catalogue</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-guineagreen">À propos</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-2 text-guineagreen"></i>
+                            <span class="text-gray-400">Kaloum, Conakry, Guinée</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-2 text-guineagreen"></i>
+                            <span class="text-gray-400">contact@produitsguinee.com</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone mt-1 mr-2 text-guineagreen"></i>
+                            <span class="text-gray-400">+224 XX XX XX XX</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fab fa-whatsapp mt-1 mr-2 text-guineagreen"></i>
+                            <span class="text-gray-400">+224 XX XX XX XX</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 mb-4 md:mb-0">© 2023 ProduitsGuinée. Tous droits réservés.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-guineagreen">Conditions d'utilisation</a>
+                    <a href="#" class="text-gray-500 hover:text-guineagreen">Politique de confidentialité</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+    <script src="pwa.js"></script>
+</body>
+</html>

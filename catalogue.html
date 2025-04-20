@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogue - Produits Guinéens</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        guineagreen: '#008000',
+                        guineared: '#CE1126',
+                        guineayellow: '#FCD116'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header class="bg-white shadow-sm">
+        <div class="flag-stripe"></div>
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-store text-guineagreen text-2xl"></i>
+                    <h1 class="text-xl font-bold text-gray-800">Produits<span class="text-guineagreen">Guinée</span></h1>
+                </div>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-guineagreen font-medium">Accueil</a>
+                    <a href="catalogue.html" class="text-guineagreen font-medium hover:text-guineared">Catalogue</a>
+                    <a href="about.html" class="text-gray-700 hover:text-guineagreen font-medium">À propos</a>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <a href="https://wa.me/224XXXXXXX" class="bg-green-500 text-white px-4 py-2 rounded-full hover:bg-green-600 transition">
+                        <i class="fab fa-whatsapp mr-1"></i> Contact
+                    </a>
+                    <button id="installApp" class="hidden bg-guineagreen text-white px-4 py-2 rounded-full hover:bg-green-700 transition">
+                        <i class="fas fa-download mr-1"></i> Installer
+                    </button>
+                    <button class="md:hidden text-gray-700" id="mobileMenuBtn">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white shadow-md">
+            <div class="container mx-auto px-4 py-3">
+                <nav class="flex flex-col space-y-3">
+                    <a href="index.html" class="text-gray-700 hover:text-guineagreen font-medium py-2">Accueil</a>
+                    <a href="catalogue.html" class="text-guineagreen font-medium hover:text-guineared py-2">Catalogue</a>
+                    <a href="about.html" class="text-gray-700 hover:text-guineagreen font-medium py-2">À propos</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search and Filter Section -->
+    <section class="py-8 bg-white border-b">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="w-full md:w-1/3">
+                    <div class="relative">
+                        <input type="text" id="searchInput" placeholder="Rechercher un produit..." class="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-guineagreen focus:border-transparent">
+                        <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                    </div>
+                </div>
+                
+                <div class="w-full md:w-2/3 flex flex-wrap gap-2 justify-end">
+                    <button class="filter-btn active px-4 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-guineagreen hover:text-white transition" data-category="all">
+                        Tous
+                    </button>
+                    <button class="filter-btn px-4 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-guineagreen hover:text-white transition" data-category="artisanat">
+                        Artisanat
+                    </button>
+                    <button class="filter-btn px-4 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-guineagreen hover:text-white transition" data-category="alimentaire">
+                        Alimentaire
+                    </button>
+                    <button class="filter-btn px-4 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-guineagreen hover:text-white transition" data-category="beaute">
+                        Beauté
+                    </button>
+                    <button class="filter-btn px-4 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-guineagreen hover:text-white transition" data-category="textile">
+                        Textile
+                    </button>
+                    <button class="filter-btn px-4 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-guineagreen hover:text-white transition" data-category="accessoires">
+                        Accessoires
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Grid -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Nos <span class="text-guineagreen">Produits</span> Locaux</h2>
+            
+            <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <!-- Products will be loaded dynamically from JS -->
+                <!-- Loading placeholder -->
+                <div class="animate-pulse bg-white rounded-xl overflow-hidden shadow-md">
+                    <div class="bg-gray-300 h-64 w-full"></div>
+                    <div class="p-6">
+                        <div class="h-6 bg-gray-300 rounded w-3/4 mb-4"></div>
+                        <div class="h-4 bg-gray-300 rounded w-1/2 mb-2"></div>
+                        <div class="h-4 bg-gray-300 rounded w-5/6 mb-4"></div>
+                        <div class="h-10 bg-gray-300 rounded w-full"></div>
+                    </div>
+                </div>
+                <div class="animate-pulse bg-white rounded-xl overflow-hidden shadow-md">
+                    <div class="bg-gray-300 h-64 w-full"></div>
+                    <div class="p-6">
+                        <div class="h-6 bg-gray-300 rounded w-3/4 mb-4"></div>
+                        <div class="h-4 bg-gray-300 rounded w-1/2 mb-2"></div>
+                        <div class="h-4 bg-gray-300 rounded w-5/6 mb-4"></div>
+                        <div class="h-10 bg-gray-300 rounded w-full"></div>
+                    </div>
+                </div>
+                <div class="animate-pulse bg-white rounded-xl overflow-hidden shadow-md">
+                    <div class="bg-gray-300 h-64 w-full"></div>
+                    <div class="p-6">
+                        <div class="h-6 bg-gray-300 rounded w-3/4 mb-4"></div>
+                        <div class="h-4 bg-gray-300 rounded w-1/2 mb-2"></div>
+                        <div class="h-4 bg-gray-300 rounded w-5/6 mb-4"></div>
+                        <div class="h-10 bg-gray-300 rounded w-full"></div>
+                    </div>
+                </div>
+                <div class="animate-pulse bg-white rounded-xl overflow-hidden shadow-md">
+                    <div class="bg-gray-300 h-64 w-full"></div>
+                    <div class="p-6">
+                        <div class="h-6 bg-gray-300 rounded w-3/4 mb-4"></div>
+                        <div class="h-4 bg-gray-300 rounded w-1/2 mb-2"></div>
+                        <div class="h-4 bg-gray-300 rounded w-5/6 mb-4"></div>
+                        <div class="h-10 bg-gray-300 rounded w-full"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="noResults" class="hidden text-center py-16">
+                <i class="fas fa-search text-gray-400 text-5xl mb-4"></i>
+                <h3 class="text-xl font-semibold text-gray-600">Aucun produit trouvé</h3>
+                <p class="text-gray-500 mt-2">Essayez de modifier vos critères de recherche</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Modal -->
+    <div id="productModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-start mb-4">
+                    <h2 id="modalTitle" class="text-2xl font-bold text-gray-800">Nom du produit</h2>
+                    <button id="closeModal" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <img id="modalImage" src="" alt="Product" class="w-full h-auto rounded-lg shadow-sm">
+                    </div>
+                    <div>
+                        <div class="mb-4">
+                            <span id="modalCategory" class="inline-block bg-guineagreen bg-opacity-10 text-guineagreen text-sm px-3 py-1 rounded-full">Catégorie</span>
+                        </div>
+                        <div class="mb-4">
+                            <h3 class="text-xl font-bold text-guineared mb-1">Prix</h3>
+                            <p id="modalPrice" class="text-2xl font-bold">0 GNF</p>
+                        </div>
+                        <div class="mb-6">
+                            <h3 class="text-xl font-bold text-gray-700 mb-2">Description</h3>
+                            <p id="modalDescription" class="text-gray-600">Description du produit</p>
+                        </div>
+                        <div class="mb-6">
+                            <h3 class="text-xl font-bold text-gray-700 mb-2">Vendeur</h3>
+                            <p id="modalVendor" class="text-gray-600">Nom du vendeur</p>
+                        </div>
+                        <a id="modalWhatsApp" href="#" class="block w-full bg-green-500 text-white text-center py-3 px-4 rounded-lg font-semibold hover:bg-green-600 transition">
+                            <i class="fab fa-whatsapp mr-2"></i> Commander via WhatsApp
+                        </a>
+                        <button id="modalShare" class="mt-4 block w-full border border-gray-300 text-gray-700 text-center py-3 px-4 rounded-lg font-semibold hover:bg-gray-100 transition">
+                            <i class="fas fa-share-alt mr-2"></i> Partager ce produit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-store text-guineagreen text-2xl"></i>
+                        <h2 class="text-xl font-bold">Produits<span class="text-guineagreen">Guinée</span></h2>
+                    </div>
+                    <p class="text-gray-400 mb-4">Catalogue des meilleurs produits locaux de Guinée, disponible hors ligne.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-guineagreen"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-guineagreen"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-guineagreen"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Liens rapides</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-guineagreen">Accueil</a></li>
+                        <li><a href="catalogue.html" class="text-gray-400 hover:text-guineagreen">Catalogue</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-guineagreen">À propos</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-2 text-guineagreen"></i>
+                            <span class="text-gray-400">Kaloum, Conakry, Guinée</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-2 text-guineagreen"></i>
+                            <span class="text-gray-400">contact@produitsguinee.com</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone mt-1 mr-2 text-guineagreen"></i>
+                            <span class="text-gray-400">+224 XX XX XX XX</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fab fa-whatsapp mt-1 mr-2 text-guineagreen"></i>
+                            <span class="text-gray-400">+224 XX XX XX XX</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 mb-4 md:mb-0">© 2023 ProduitsGuinée. Tous droits réservés.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-guineagreen">Conditions d'utilisation</a>
+                    <a href="#" class="text-gray-500 hover:text-guineagreen">Politique de confidentialité</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="products.js"></script>
+    <script src="app.js"></script>
+    <script src="pwa.js"></script>
+</body>
+</html>

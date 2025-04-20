@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+}
+
+.hero-gradient {
+    background: linear-gradient(135deg, rgba(0,128,0,0.9) 0%, rgba(206,17,38,0.8) 50%, rgba(252,209,22,0.9) 100%);
+}
+
+.art-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.art-card {
+    transition: all 0.3s ease;
+}
+
+.flag-stripe {
+    height: 4px;
+    background: linear-gradient(90deg, #008000 33%, #FCD116 33% 66%, #CE1126 66%);
+}
+
+.filter-btn.active {
+    background-color: #008000;
+    color: white;
+}
+
+/* Animation pour les produits */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.product-card {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+/* Mode sombre */
+.dark-mode {
+    background-color: #1a1a1a;
+    color: #f1f1f1;
+}
+
+.dark-mode .bg-white {
+    background-color: #2a2a2a;
+}
+
+.dark-mode .text-gray-800 {
+    color: #f1f1f1;
+}
+
+.dark-mode .text-gray-700 {
+    color: #e1e1e1;
+}
+
+.dark-mode .text-gray-600 {
+    color: #d1d1d1;
+}
+
+.dark-mode .bg-gray-50 {
+    background-color: #333333;
+}
+
+.dark-mode .border-gray-300 {
+    border-color: #444444;
+}
