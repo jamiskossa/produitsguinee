@@ -1,592 +1,233 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>eBook Recettes Guinéennes</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-    
-    :root {
-      --primary-color: #e67e22;
-      --spice-color: #d35400;
-    }
-    
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #dde1e6;
-      
-    }
-    
-    .text-primary-600 { color: var(--primary-color); }
-    .bg-primary-600 { background-color: var(--primary-color); }
-    .hover\:bg-primary-700:hover { background-color: #d35400; }
-    .text-spice-500 { color: var(--spice-color); }
-    .bg-spice-500 { background-color: var(--spice-color); }
-    
-    .animate-fade-in {
-      animation: fadeIn 0.8s ease-in-out forwards;
-      opacity: 0;
-    }
-    
-    .animate-slide-up {
-      animation: slideUp 0.5s ease-in-out forwards;
-    }
-    
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    
-    @keyframes slideUp {
-      from { transform: translateY(20px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-    
-    .aspect-w-16 {
-      position: relative;
-      padding-bottom: 56.25%;
-    }
-    
-    .aspect-w-16 iframe {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-    }
-    
-    .text-shadow-lg {
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogue Produits Guinéens</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        guineagreen: '#008000',
+                        guineared: '#CE1126',
+                        guineayellow: '#FCD116'
+                    }
+                }
+            }
+        }
+    </script>
 </head>
+<body>
+    <!-- Header with Navigation -->
+    <header class="bg-white shadow-sm">
+        <div class="flag-stripe"></div>
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-store text-guineagreen text-2xl"></i>
+                    <h1 class="text-xl font-bold text-gray-800">Produits<span class="text-guineagreen">Guinée</span></h1>
+                </div>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-guineagreen font-medium hover:text-guineared">Accueil</a>
+                    <a href="catalogue.html" class="text-gray-700 hover:text-guineagreen font-medium">Catalogue</a>
+                    <a href="about.html" class="text-gray-700 hover:text-guineagreen font-medium">À propos</a>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <a href="https://wa.me/224XXXXXXX" class="bg-green-500 text-white px-4 py-2 rounded-full hover:bg-green-600 transition">
+                        <i class="fab fa-whatsapp mr-1"></i> Contact
+                    </a>
+                    <button id="installApp" class="hidden bg-guineagreen text-white px-4 py-2 rounded-full hover:bg-green-700 transition">
+                        <i class="fas fa-download mr-1"></i> Installer
+                    </button>
+                    <button class="md:hidden text-gray-700" id="mobileMenuBtn">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white shadow-md">
+            <div class="container mx-auto px-4 py-3">
+                <nav class="flex flex-col space-y-3">
+                    <a href="index.html" class="text-guineagreen font-medium hover:text-guineared py-2">Accueil</a>
+                    <a href="catalogue.html" class="text-gray-700 hover:text-guineagreen font-medium py-2">Catalogue</a>
+                    <a href="about.html" class="text-gray-700 hover:text-guineagreen font-medium py-2">À propos</a>
+                </nav>
+            </div>
+        </div>
+    </header>
 
-<body class="bg-gray-500 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-  <!-- Header Section -->
-  <header class="bg-gradient-to-r from-yellow-600 to-red-600 text-white">
-    <div class="container mx-auto px-4 py-8 md:py-12">
-      <div class="flex flex-col md:flex-row justify-between items-center">
-        <div class="flex items-center mb-4 md:mb-0">
-          <img src="logo.png" alt="Logo Recettes Guinéennes" class="h-12 mr-3">
-          <h1 class="text-2xl md:text-3xl font-bold">Recettes Traditionnelles de Guinée</h1>
-        </div>
-        <nav class="flex space-x-1 md:space-x-4">
-          <a href="#" class="px-3 py-2 rounded-lg hover:bg-white/20 transition-colors duration-300">Accueil</a>
-          <a href="recettes.html" class="px-3 py-2 rounded-lg hover:bg-white/20 transition-colors duration-300">Recettes</a>
-          <a href="ebook.html" class="px-3 py-2 rounded-lg hover:bg-white/20 transition-colors duration-300">eBook</a>
-          <a href="#" class="px-3 py-2 rounded-lg hover:bg-white/20 transition-colors duration-300">Contact</a>
-          <button id="theme-toggle" class="p-2 rounded-full hover:bg-white/20 transition-colors duration-300">
-            <svg id="dark-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
-            </svg>
-            <svg id="light-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
-            </svg>
-          </button>
-        </nav>
-      </div>
-    </div>
-  </header>
-
-  <!-- Hero Section -->
-  <section class="relative bg-cover bg-center py-20" style="background-image: url('images/loko.png');">
-    <div class="absolute inset-0 bg-black/50"></div>
-    <div class="container mx-auto px-4 relative z-10">
-      <div class="max-w-3xl mx-auto text-center text-white">
-        <h2 class="text-4xl md:text-5xl font-bold mb-6 animate-fade-in">Découvrez les Saveurs Authentiques de la Guinée</h2>
-        <p class="text-xl mb-8 animate-fade-in" style="animation-delay: 0.2s;">Une collection de recettes traditionnelles guinéennes, des techniques de préparation et des histoires culturelles.</p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in" style="animation-delay: 0.3s;">
-          <a href="recettes.html" class="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-            Explorer les Recettes
-          </a>
-          <a href="ebook.html" class="px-6 py-3 bg-white text-primary-600 hover:bg-gray-100 font-medium rounded-lg shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-            Acheter l'eBook
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Main Content Section -->
-  <main id="recette-container" class="container mx-auto px-4 py-12">
-    <!-- Search and Filter Section -->
-    <div class="mb-12 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 animate-fade-in">
-      <div class="flex flex-col md:flex-row gap-4 md:items-end">
-        <div class="flex-grow">
-          <label for="search-recipes" class="block text-gray-700 dark:text-gray-300 mb-2 font-medium">Rechercher une recette</label>
-          <div class="relative">
-            <input type="text" id="search-recipes" placeholder="Nom de recette, ingrédient, région..." class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all duration-300">
-            <svg class="w-5 h-5 text-gray-500 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
-          </div>
-        </div>
-        <div class="md:w-1/4">
-          <label for="filter-region" class="block text-gray-700 dark:text-gray-300 mb-2 font-medium">Filtrer par région</label>
-          <select id="filter-region" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all duration-300">
-            <option value="">Toutes les régions</option>
-            <option value="Guinée Forestière">Guinée Forestière</option>
-            <option value="Guinée Maritime">Guinée Maritime</option>
-            <option value="Moyenne Guinée">Moyenne Guinée</option>
-            <option value="Haute Guinée">Haute Guinée</option>
-          </select>
-        </div>
-        <div class="md:w-1/4">
-          <label for="filter-type" class="block text-gray-700 dark:text-gray-300 mb-2 font-medium">Type de plat</label>
-          <select id="filter-type" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all duration-300">
-            <option value="">Tous les types</option>
-            <option value="Plat principal">Plat principal</option>
-            <option value="Entrée">Entrée</option>
-            <option value="Dessert">Dessert</option>
-            <option value="Sauce">Sauce</option>
-            <option value="Accompagnement">Accompagnement</option>
-          </select>
-        </div>
-        <button id="apply-filters" class="px-6 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors duration-300 flex items-center justify-center">
-          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
-          </svg>
-          Filtrer
-        </button>
-      </div>
-    </div>
-
-    <!-- Recipes Swiper Section -->
-    <div id="recettes" class="mb-16 animate-fade-in" style="animation-delay: 0.3s;">
-      <div class="text-center mb-8">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4 text-primary-700 dark:text-primary-400">Nos Recettes Populaires</h2>
-        <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">Découvrez les plats traditionnels guinéens les plus appréciés, avec des instructions détaillées et des astuces de préparation.</p>
-      </div>
-      
-      <div class="swiper relative">
-        <div class="swiper-wrapper">
-          <!-- Les recettes seront injectées ici par JavaScript -->
-        </div>
-        
-        <!-- Pagination et navigation -->
-        <div class="swiper-pagination mt-6"></div>
-        <div class="swiper-button-prev text-primary-600 dark:text-primary-400 hidden md:flex"></div>
-        <div class="swiper-button-next text-primary-600 dark:text-primary-400 hidden md:flex"></div>
-      </div>
-    </div>
-    
-    <!-- Recipe Detail Modal -->
-    <div id="recipe-modal" class=" inset-0 z-50 flex items-center justify-center hidden">
-      <div class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
-      <div class="relative bg-white dark:bg-gray-800 w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-xl shadow-2xl animate-slide-up">
-        <button id="close-modal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 z-10">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
-        </button>
-        <div id="recipe-modal-content">
-          <!-- Le contenu de la recette sera injecté ici par JavaScript -->
-        </div>
-      </div>
-    </div>
-    
-    <!-- Timer Section -->
-    <div class="mt-16 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 md:p-8 animate-fade-in" style="animation-delay: 0.4s;">
-      <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-6 flex items-center">
-        <svg class="w-7 h-7 mr-2 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-        </svg>
-        Minuteur de Cuisson
-      </h3>
-      <p class="text-gray-600 dark:text-gray-400 mb-6">Utilisez notre minuteur pour suivre précisément le temps de cuisson de vos plats guinéens.</p>
-      
-      <div class="flex flex-col md:flex-row gap-6">
-        <div class="flex-grow space-y-4">
-          <div>
-            <label for="temps-cuisson" class="block text-gray-700 dark:text-gray-300 mb-2 font-medium">Temps de cuisson (minutes)</label>
-            <input type="number" id="temps-cuisson" min="1" value="30" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all duration-300">
-          </div>
-          <div>
-            <label for="recette-select" class="block text-gray-700 dark:text-gray-300 mb-2 font-medium">Recette en préparation</label>
-            <select id="recette-select" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all duration-300">
-              <option value="tobogui">Tobogui (Sauce d'aubergines)</option>
-              <option value="aloco">Aloco (Bananes plantains frites)</option>
-              <option value="poulet-yassa">Poulet Yassa</option>
-              <option value="riz-gras">Riz au Gras</option>
-              <option value="konkoé">Konkoé (Riz à la sauce feuille)</option>
-              <option value="tô">Tô (Pâte de maïs ou de manioc)</option>
-              <option value="mafé">Mafé (Sauce à l'arachide)</option>
-            </select>
-          </div>
-          <div class="flex-shrink-0 self-end md:self-center mt-4 md:mt-0">
-            <button id="start-timer" class="px-6 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors duration-300 flex items-center justify-center">
-              <span>Démarrer</span>
-              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
-        <div id="timer-display" class="mt-6 text-center hidden">
-          <div class="bg-gray-100 dark:bg-gray-700 rounded-lg p-4">
-            <div class="text-4xl font-bold text-primary-600 dark:text-primary-400 mb-2" id="timer-countdown">00:00</div>
-            <p class="text-gray-600 dark:text-gray-400" id="timer-status">Minuteur prêt</p>
-            <div class="mt-4 flex justify-center space-x-3">
-              <button id="pause-timer" class="px-4 py-2 bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 text-gray-700 dark:text-gray-300 rounded-lg transition-colors duration-300">
-                Pause
-              </button>
-              <button id="reset-timer" class="px-4 py-2 bg-red-100 dark:bg-red-900/30 hover:bg-red-200 dark:hover:bg-red-900/50 text-red-700 dark:text-red-400 rounded-lg transition-colors duration-300">
-                Réinitialiser
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-      
-    <!-- Featured Video Section -->
-    <div class="mt-16 animate-fade-in" style="animation-delay: 0.5s;">
-      <div class="text-center mb-8">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4 text-primary-700 dark:text-primary-400">Vidéo en Vedette</h2>
-        <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">Apprenez à préparer le Tobogui traditionnel avec notre chef guinéen.</p>
-      </div>
-      
-      <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
-        <div class="aspect-w-16 aspect-h-9">
-          <iframe class="w-full h-full" src="https://www.youtube.com/embed/k7EmRnV37x8" allowfullscreen></iframe>
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2">Comment préparer le Tobogui authentique</h3>
-          <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-4">
-            <svg class="w-5 h-5 mr-1 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
-            </svg>
-            Chef Mariama Camara
-            <span class="mx-2">•</span>
-            <svg class="w-5 h-5 mr-1 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            15:32 min
-            <span class="mx-2">•</span>
-            <svg class="w-5 h-5 mr-1 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-            </svg>
-            8.5K vues
-          </div>
-          <p class="text-gray-600 dark:text-gray-400">Découvrez les secrets de préparation du Tobogui, une sauce d'aubergines traditionnelle de la Guinée Forestière. Notre chef vous guide étape par étape pour réaliser ce plat savoureux et authentique.</p>
-          <div class="mt-4 flex flex-wrap gap-2">
-            <a href="#" class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-300">
-              <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
-              </svg>
-              Télécharger la recette
-            </a>
-            <div class="ml-auto flex space-x-3">
-              <button class="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-300">
-                <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path>
-                </svg>
-                J'aime
-              </button>
-              <button class="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-300">
-                <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
-                </svg>
-                Partager
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Share Section -->
-    <div class="mt-16 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 md:p-8 animate-fade-in" style="animation-delay: 0.6s;">
-      <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-6 flex items-center">
-        <svg class="w-7 h-7 mr-2 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
-        </svg>
-        Partager cette recette
-      </h3>
-      <p class="text-gray-600 dark:text-gray-400 mb-6">Vous aimez nos recettes guinéennes ? Partagez-les avec vos amis et votre famille !</p>
-      <div class="flex flex-wrap gap-3">
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https://votre-site.com" target="_blank" class="flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors duration-300">
-          <i class="fab fa-facebook-f mr-2"></i>
-          Facebook
-        </a>
-        <a href="https://twitter.com/intent/tweet?text=Découvrez cette recette guinéenne !&url=https://votre-site.com" target="_blank" class="flex items-center px-4 py-2 bg-sky-500 hover:bg-sky-600 text-white rounded-lg transition-colors duration-300">
-          <i class="fab fa-twitter mr-2"></i>
-          Twitter
-        </a>
-        <a href="https://wa.me/?text=Découvrez cette délicieuse recette guinéenne : https://votre-site.com" target="_blank" class="flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors duration-300">
-            <i class="fab fa-whatsapp mr-2"></i>
-            WhatsApp
-          </a>
-          <a href="mailto:?subject=Recette guinéenne à découvrir&body=Voici une délicieuse recette guinéenne : https://votre-site.com" class="flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors duration-300">
-            <i class="far fa-envelope mr-2"></i>
-            Email
-          </a>
-          <a href="https://pinterest.com/pin/create/button/?url=https://votre-site.com&media=https://votre-site.com/images/recette.jpg&description=Recette guinéenne traditionnelle" target="_blank" class="flex items-center px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors duration-300">
-            <i class="fab fa-pinterest-p mr-2"></i>
-            Pinterest
-          </a>
-        </div>
-      </div>
-    </main>
-  
-    <!-- eBook Purchase Section -->
-    <section id="ebook" class="py-20 bg-gradient-to-br from-primary-600 to-spice-500 text-white">
-      <div class="container mx-auto px-4">
-        <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-          <div class="md:w-1/2 flex justify-center">
-            <div class="relative">
-              <img src="ebook-cover.png" alt="eBook Recettes Guinéennes" class="w-64 md:w-80 rounded-lg shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-500">
-              <div class="absolute -bottom-4 -right-4 bg-white text-primary-600 font-bold py-2 px-4 rounded-full shadow-lg transform rotate-12">
-                Nouveau!
-              </div>
-            </div>
-          </div>
-          
-          <div class="md:w-1/2 text-center md:text-left">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-shadow-lg">📘 eBook Recettes Guinéennes</h2>
-            <p class="text-xl mb-6">Emportez toutes nos recettes traditionnelles guinéennes partout avec vous !</p>
-            <ul class="mb-8 space-y-3">
-              <li class="flex items-center">
-                <svg class="w-6 h-6 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                Plus de 50 recettes authentiques
-              </li>
-              <li class="flex items-center">
-                <svg class="w-6 h-6 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                Instructions détaillées et photos
-              </li>
-              <li class="flex items-center">
-                <svg class="w-6 h-6 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                Histoire et origine de chaque plat
-              </li>
-              <li class="flex items-center">
-                <svg class="w-6 h-6 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                Compatible Kindle, iPad et PDF
-              </li>
-            </ul>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-              <a href="https://www.amazon.fr/dp/votre-lien-kindle" target="_blank" class="px-6 py-3 bg-white text-primary-700 hover:bg-gray-100 font-medium rounded-full shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center">
-                <i class="fab fa-amazon mr-2"></i>
-                Acheter sur Amazon
-              </a>
-              <a href="#" class="px-6 py-3 bg-transparent border-2 border-white hover:bg-white/10 font-medium rounded-full shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center">
-                <i class="far fa-eye mr-2"></i>
-                Aperçu gratuit
-              </a>
-            </div>
-            <p class="mt-6 text-sm text-white/80">À partir de 9,99€ seulement. Livraison instantanée.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  
-    <!-- Testimonials Section -->
-    <section class="container mx-auto px-4 py-16 animate-fade-in" style="animation-delay: 0.8s;">
-      <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold mb-4 text-primary-700 dark:text-primary-400">Ce que disent nos lecteurs</h2>
-          <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">Découvrez les témoignages de personnes qui ont essayé nos recettes guinéennes.</p>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Testimonial 1 -->
-          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
-            <div class="flex text-yellow-500 mb-4">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-            </div>
-            <p class="text-gray-600 dark:text-gray-400 mb-6 italic">"Ces recettes m'ont rappelé mon enfance en Guinée. Les saveurs sont authentiques et les instructions sont très claires. J'ai pu préparer un Konkoé parfait dès le premier essai !"</p>
-            <div class="flex items-center">
-              <div class="w-12 h-12 rounded-full bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center text-primary-700 dark:text-primary-300 font-bold text-xl mr-4">
-                AF
-              </div>
-              <div>
-                <h4 class="font-bold text-gray-800 dark:text-white">Aminata Fofana</h4>
-                <p class="text-sm text-gray-500 dark:text-gray-400">Conakry, Guinée</p>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Testimonial 2 -->
-          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
-            <div class="flex text-yellow-500 mb-4">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star-half-alt"></i>
-            </div>
-            <p class="text-gray-600 dark:text-gray-400 mb-6 italic">"Je ne connaissais pas la cuisine guinéenne avant de découvrir cet eBook. Quelle révélation ! Le Mafé est devenu un plat régulier chez nous. Merci pour ces recettes détaillées et faciles à suivre."</p>
-            <div class="flex items-center">
-              <div class="w-12 h-12 rounded-full bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center text-primary-700 dark:text-primary-300 font-bold text-xl mr-4">
-                JD
-              </div>
-              <div>
-                <h4 class="font-bold text-gray-800 dark:text-white">Jean Dupont</h4>
-                <p class="text-sm text-gray-500 dark:text-gray-400">Paris, France</p>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Testimonial 3 -->
-          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
-            <div class="flex text-yellow-500 mb-4">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-            </div>
-            <p class="text-gray-600 dark:text-gray-400 mb-6 italic">"L'histoire derrière chaque plat rend l'expérience encore plus riche. J'ai appris non seulement à cuisiner guinéen, mais aussi à comprendre la culture. Le Tobogui est maintenant le plat préféré de toute ma famille !"</p>
-            <div class="flex items-center">
-              <div class="w-12 h-12 rounded-full bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center text-primary-700 dark:text-primary-300 font-bold text-xl mr-4">
-                MS
-              </div>
-              <div>
-                <h4 class="font-bold text-gray-800 dark:text-white">Mamadou Sow</h4>
-                <p class="text-sm text-gray-500 dark:text-gray-400">Dakar, Sénégal</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  
-    <!-- FAQ Chatbot Section -->
-    <div class="fixed bottom-24 right-4 z-40 animate-fade-in" style="animation-delay: 1s;">
-      <button id="toggle-faq" class="h-14 w-14 rounded-full bg-primary-600 hover:bg-primary-700 text-white shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-105">
-        <svg id="faq-icon-chat" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-        </svg>
-        <svg id="faq-icon-close" class="w-7 h-7 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-        </svg>
-      </button>
-      
-      <div id="faq-window" class="hidden bg-white dark:bg-gray-800 rounded-xl shadow-2xl w-80 md:w-96 overflow-hidden animate-slide-up">
-        <div class="bg-primary-600 text-white p-4">
-          <h4 class="font-bold text-lg flex items-center">
-            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            FAQ - Questions fréquentes
-          </h4>
-        </div>
-        <div class="p-4 max-h-96 overflow-y-auto">
-          <ul id="faq-list" class="space-y-4">
-            <!-- FAQ items will be inserted here by JavaScript -->
-          </ul>
-        </div>
-        <div class="p-4 border-t border-gray-200 dark:border-gray-700">
-          <div class="relative">
-            <input type="text" placeholder="Posez votre question..." class="w-full pl-4 pr-10 py-2 rounded-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500">
-            <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-      <!-- Floating WhatsApp Button -->
-      <a href="https://wa.me/224XXXXXXXXX?text=Bonjour%20je%20souhaite%20plus%20d'informations%20sur%20votre%20eBook%20de%20recettes" class="fixed bottom-4 right-4 z-40 px-4 py-3 bg-green-600 hover:bg-green-700 text-white rounded-full shadow-lg transition-all duration-300 hover:scale-105 flex items-center animate-fade-in" style="animation-delay: 1.2s;" target="_blank" title="Contactez-nous sur WhatsApp">
-        <i class="fab fa-whatsapp text-xl mr-2"></i>
-        Chat WhatsApp
-      </a>
-    
-      <!-- Footer Section -->
-      <footer class="bg-gray-900 text-white pt-16 pb-8">
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white py-16 md:py-24">
         <div class="container mx-auto px-4">
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-            <!-- About -->
-            <div>
-              <h3 class="text-xl font-bold mb-4 text-primary-400">À propos</h3>
-              <p class="text-gray-400 mb-4">Notre mission est de préserver et partager les traditions culinaires guinéennes avec le monde entier, en offrant des recettes authentiques et accessibles.</p>
-              <div class="flex space-x-4">
-                <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
-                  <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
-                  <i class="fab fa-twitter"></i>
-                </a>
-                <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
-                  <i class="fab fa-instagram"></i>
-                </a>
-                <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
-                  <i class="fab fa-youtube"></i>
-                </a>
-              </div>
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Découvrez les <span class="text-guineayellow">Produits</span> Guinéens</h1>
+                    <p class="text-xl mb-8">Un catalogue des meilleurs produits locaux de Guinée, disponible même sans connexion internet.</p>
+                    <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
+                        <a href="catalogue.html" class="bg-white text-guineagreen px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition text-center">
+                            <i class="fas fa-shopping-bag mr-2"></i> Voir les produits
+                        </a>
+                        <a href="https://wa.me/224XXXXXXX" class="border-2 border-white text-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-guineagreen transition text-center">
+                            <i class="fab fa-whatsapp mr-2"></i> Commander via WhatsApp
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="relative">
+                        <img src="1.png" alt="Produits guinéens" class="rounded-lg shadow-xl w-full max-w-md">
+                        <div class="absolute -bottom-5 -right-5 bg-guineared text-white px-4 py-2 rounded-full shadow-lg">
+                            <i class="fas fa-certificate mr-2"></i> 100% Local
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <!-- Quick Links -->
-            <div>
-              <h3 class="text-xl font-bold mb-4 text-primary-400">Liens rapides</h3>
-              <ul class="space-y-2">
-                <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Accueil</a></li>
-                <li><a href="recettes.html" class="text-gray-400 hover:text-white transition-colors duration-300">Toutes les recettes</a></li>
-                <li><a href="ebook.html" class="text-gray-400 hover:text-white transition-colors duration-300">eBook</a></li>
-                <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">À propos de la Guinée</a></li>
-                <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Contact</a></li>
-              </ul>
-            </div>
-            
-            <!-- Categories -->
-            <div>
-              <h3 class="text-xl font-bold mb-4 text-primary-400">Catégories</h3>
-              <ul class="space-y-2">
-                <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Guinée Forestière</a></li>
-                <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Guinée Maritime</a></li>
-                <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Moyenne Guinée</a></li>
-                <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Haute Guinée</a></li>
-                <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Plats de fête</a></li>
-              </ul>
-            </div>
-            
-            <!-- Newsletter -->
-            <div>
-              <h3 class="text-xl font-bold mb-4 text-primary-400">Newsletter</h3>
-              <p class="text-gray-400 mb-4">Inscrivez-vous pour recevoir de nouvelles recettes et des offres exclusives.</p>
-              <form class="flex flex-col space-y-3">
-                <input type="email" placeholder="Votre email" class="px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-primary-500">
-                <button type="submit" class="px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors duration-300">S'abonner</button>
-              </form>
-            </div>
-          </div>
-          
-          <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p class="text-gray-400 text-center md:text-left">&copy; 2024 Yattara Ousmane. Tous droits réservés.</p>
-            <div class="mt-4 md:mt-0">
-              <ul class="flex space-x-6 text-sm text-gray-400">
-                <li><a href="#" class="hover:text-white transition-colors duration-300">Politique de confidentialité</a></li>
-                <li><a href="#" class="hover:text-white transition-colors duration-300">Conditions d'utilisation</a></li>
-                <li><a href="#" class="hover:text-white transition-colors duration-300">Cookies</a></li>
-              </ul>
-            </div>
-          </div>
         </div>
-      </footer>
-    
-      <!-- Scripts -->
-      <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-      <script src="script.js"></script>
-    </body>
-    </html>
-    
+    </section>
+
+    <!-- Featured Categories -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Nos <span class="text-guineagreen">Catégories</span> de Produits</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
+                <!-- Artisanat -->
+                <a href="catalogue.html?categorie=artisanat" class="art-card bg-white rounded-xl overflow-hidden shadow-md p-6 text-center">
+                    <div class="bg-guineagreen bg-opacity-10 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-paint-brush text-guineagreen text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Artisanat</h3>
+                    <p class="text-gray-600 mb-4">Objets d'art et décorations faits main par des artisans locaux</p>
+                </a>
+                
+                <!-- Alimentaire -->
+                <a href="catalogue.html?categorie=alimentaire" class="art-card bg-white rounded-xl overflow-hidden shadow-md p-6 text-center">
+                    <div class="bg-guineared bg-opacity-10 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-utensils text-guineared text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Alimentaire</h3>
+                    <p class="text-gray-600 mb-4">Produits alimentaires traditionnels et spécialités guinéennes</p>
+                </a>
+                
+                <!-- Beauté -->
+                <a href="catalogue.html?categorie=beaute" class="art-card bg-white rounded-xl overflow-hidden shadow-md p-6 text-center">
+                    <div class="bg-guineayellow bg-opacity-10 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-spa text-guineayellow text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Beauté</h3>
+                    <p class="text-gray-600 mb-4">Produits cosmétiques naturels fabriqués en Guinée</p>
+                </a>
+                
+                <!-- Textile -->
+                <a href="catalogue.html?categorie=textile" class="art-card bg-white rounded-xl overflow-hidden shadow-md p-6 text-center">
+                    <div class="bg-gray-800 bg-opacity-10 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-tshirt text-gray-800 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Textile</h3>
+                    <p class="text-gray-600 mb-4">Vêtements et tissus traditionnels guinéens</p>
+                </a>
+                
+                <!-- Accessoires -->
+                <a href="catalogue.html?categorie=accessoires" class="art-card bg-white rounded-xl overflow-hidden shadow-md p-6 text-center">
+                    <div class="bg-guineagreen bg-opacity-10 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-gem text-guineagreen text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Accessoires</h3>
+                    <p class="text-gray-600 mb-4">Bijoux et accessoires de mode fabriqués localement</p>
+                </a>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="catalogue.html" class="border-2 border-guineagreen text-guineagreen px-6 py-3 rounded-full font-semibold hover:bg-guineagreen hover:text-white transition">
+                    <i class="fas fa-th-large mr-2"></i> Voir tout le catalogue
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-16 bg-guineagreen text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6">Accédez au catalogue même sans internet !</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Installez notre application sur votre téléphone pour consulter les produits à tout moment, même sans connexion.</p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                <button id="installAppCTA" class="bg-white text-guineagreen px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition">
+                    <i class="fas fa-download mr-2"></i> Installer l'application
+                </button>
+                <a href="https://wa.me/224XXXXXXX" class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-guineagreen transition">
+                    <i class="fab fa-whatsapp mr-2"></i> Contacter le vendeur
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-store text-guineagreen text-2xl"></i>
+                        <h2 class="text-xl font-bold">Produits<span class="text-guineagreen">Guinée</span></h2>
+                    </div>
+                    <p class="text-gray-400 mb-4">Catalogue des meilleurs produits locaux de Guinée, disponible hors ligne.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-guineagreen"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-guineagreen"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-guineagreen"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Liens rapides</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-guineagreen">Accueil</a></li>
+                        <li><a href="catalogue.html" class="text-gray-400 hover:text-guineagreen">Catalogue</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-guineagreen">À propos</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-2 text-guineagreen"></i>
+                            <span class="text-gray-400">Kaloum, Conakry, Guinée</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-2 text-guineagreen"></i>
+                            <span class="text-gray-400">contact@produitsguinee.com</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone mt-1 mr-2 text-guineagreen"></i>
+                            <span class="text-gray-400">+224 XX XX XX XX</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fab fa-whatsapp mt-1 mr-2 text-guineagreen"></i>
+                            <span class="text-gray-400">+224 XX XX XX XX</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 mb-4 md:mb-0">© 2025 ProduitsGuinée. YATTARA OUSMNE Tous droits réservés.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-guineagreen">Conditions d'utilisation</a>
+                    <a href="#" class="text-gray-500 hover:text-guineagreen">Politique de confidentialité</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+    <script src="pwa.js"></script>
+</body>
+</html>
